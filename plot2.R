@@ -1,15 +1,20 @@
-## Script to create plot2.png
-## This was created as part of Coursera Data Science Specialization
-## Course: Exploratory Data Analysis, Course Project # 1
-## Author: Brent Brewington
+## Coursera - Exploratory Data Analysis
+## Course Project # 1
+## Author: Brent Brewington, (github: bbrewington)
+## Plot2.R
 
 # Get data from file "household_power_consumption", and save to data frame "DF"
 
-temp <- tempfile()
-download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp)
-DF <- read.table(unz(temp, "household_power_consumption.txt"), 
-                 header=TRUE,sep=";",na.strings="?",stringsAsFactors=FALSE)
-unlink(temp)
+if(!("household_power_consumption.txt" %in% list.files())){
+  temp <- tempfile()
+  download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp)
+  DF <- read.table(unz(temp, "household_power_consumption.txt"), 
+                   header=TRUE,sep=";",na.strings="?",stringsAsFactors=FALSE)
+  unlink(temp)
+} else{
+  DF <- read.table("household_power_consumption.txt", 
+                   header=TRUE,sep=";",na.strings="?",stringsAsFactors=FALSE)
+}
 
 # Create new data frame "DF_subset", which only includes Feb 1, 2007 - Feb 2, 2007
 
